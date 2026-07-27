@@ -1,3 +1,10 @@
+interface PostData {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
 export async function getWeather(
     { lat, lon }: { lat: number; lon: number }) {
     const res = await fetch(`https://api.openweathermap.org/data/4.0/onecall/timeline/1min?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,alerts&appid=${import.meta.env.VITE_API_KEY}`);
@@ -5,7 +12,7 @@ export async function getWeather(
     return data;
 }
 
-export async function getPost(){
+export async function getPost() : Promise<PostData[]>{
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
     const data = await res.json();
     return data;
